@@ -6,7 +6,7 @@ index 3db4e37..3829158 100644
  
  AUTOMAKE_OPTIONS = 1.9 gnu dist-bzip2 check-news
  
--SUBDIRS = libpam tests libpamc libpam_misc modules po conf doc examples xtests
+-SUBDIRS = libpam tests libpamc libpam_misc modules po doc examples xtests
 +SUBDIRS = libpam tests libpamc libpam_misc modules po examples xtests
  
  CLEANFILES = *~

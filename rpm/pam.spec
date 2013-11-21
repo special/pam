@@ -29,7 +29,6 @@ Source16: postlogin.pamd
 Source17: postlogin.5
 Patch1:  pam-1.0.90-redhat-modules.patch
 Patch2:  pam-1.1.6-std-noclose.patch
-Patch3:  pam-1.1.8-nodocs.patch
 Patch4:  pam-1.1.0-console-nochmod.patch
 Patch5:  pam-1.1.0-notally.patch
 Patch7:  pam-1.1.0-console-fixes.patch
@@ -46,6 +45,7 @@ Patch20: pam-1.1.5-unix-no-fallback.patch
 Patch29: pam-1.1.6-pwhistory-helper.patch
 Patch31: pam-1.1.6-use-links.patch
 Patch32: pam-1.1.7-tty-audit-init.patch
+Patch33: pam-1.1.8-nodocs.patch
 
 %define _pamlibdir %{_libdir}
 %define _moduledir %{_libdir}/security
@@ -95,7 +95,6 @@ mv pam-redhat-%{pam_redhat_version}/* modules
 
 %patch1 -p1 -b .redhat-modules
 %patch2 -p1 -b .std-noclose
-%patch3 -p1
 %patch4 -p1 -b .nochmod
 %patch5 -p1 -b .notally
 %patch7 -p1 -b .console-fixes
@@ -110,6 +109,7 @@ mv pam-redhat-%{pam_redhat_version}/* modules
 %patch29 -p1 -b .pwhhelper
 %patch31 -p1 -b .links
 %patch32 -p1 -b .tty-audit-init
+%patch33 -p1
 
 %build
 # To make the changelog generation work.
