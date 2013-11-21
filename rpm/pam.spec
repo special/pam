@@ -211,6 +211,8 @@ if [ -d ${dir} ] ; then
 fi
 done
 
+chmod 755 %{SOURCE11}
+
 # Check for module problems.  Specifically, check that every module we just
 # installed can actually be loaded by a minimal PAM-aware application.
 /sbin/ldconfig -n $RPM_BUILD_ROOT%{_pamlibdir}
