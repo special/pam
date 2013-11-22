@@ -66,6 +66,9 @@ BuildRequires: db4-devel
 
 URL: http://www.linux-pam.org/
 
+Obsoletes: pam-modules-userdb <= 1.1.1
+Provides:  pam-modules-userdb = %{version}
+
 %description
 PAM (Pluggable Authentication Modules) is a system security tool that
 allows system administrators to set authentication policy without
