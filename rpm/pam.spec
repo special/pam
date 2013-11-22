@@ -47,8 +47,8 @@ Patch31: pam-1.1.6-use-links.patch
 Patch32: pam-1.1.7-tty-audit-init.patch
 Patch33: pam-1.1.8-nodocs.patch
 
-%define _pamlibdir %{_libdir}
-%define _moduledir %{_libdir}/security
+%define _pamlibdir /lib/
+%define _moduledir /lib/security
 %define _secconfdir %{_sysconfdir}/security
 %define _pamconfdir %{_sysconfdir}/pam.d
 
@@ -184,7 +184,7 @@ rm -f $RPM_BUILD_ROOT%{_moduledir}/*.la
 install -d -m 755 $RPM_BUILD_ROOT%{_libdir}
 for lib in libpam libpamc libpam_misc ; do
 pushd $RPM_BUILD_ROOT%{_libdir}
-ln -sf %{_pamlibdir}/${lib}.so.*.* ${lib}.so
+ln -sf ../../lib/${lib}.so.*.* ${lib}.so
 popd
 rm -f $RPM_BUILD_ROOT%{_pamlibdir}/${lib}.so
 done
