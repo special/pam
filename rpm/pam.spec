@@ -63,6 +63,8 @@ BuildRequires: bison, flex, sed
 BuildRequires: perl, pkgconfig, gettext-devel
 Requires: glibc >= 2.3.90-37
 BuildRequires: db4-devel
+BuildRequires: pkgconfig(libselinux)
+BuildRequires: pkgconfig(audit)
 
 URL: http://www.linux-pam.org/
 
@@ -126,8 +128,6 @@ autoreconf -v -f -i
 %configure \
 	--libdir=%{_pamlibdir} \
 	--includedir=%{_includedir}/security \
-	--disable-selinux \
-	--disable-audit \
 	--disable-static \
 	--disable-prelude
 make
@@ -202,9 +202,6 @@ install -m644 -D %{SOURCE15} $RPM_BUILD_ROOT%{_prefix}/lib/tmpfiles.d/pam.conf
 # Make sure every module subdirectory gave us a module.  Yes, this is hackish.
 for dir in modules/pam_* ; do
 if [ -d ${dir} ] ; then
-        [ ${dir} = "modules/pam_selinux" ] && continue
-        [ ${dir} = "modules/pam_sepermit" ] && continue
-        [ ${dir} = "modules/pam_tty_audit" ] && continue
 	[ ${dir} = "modules/pam_cracklib" ] && continue
 	[ ${dir} = "modules/pam_tally" ] && continue
 	if ! ls -1 $RPM_BUILD_ROOT%{_moduledir}/`basename ${dir}`*.so ; then
@@ -291,12 +288,15 @@ fi
 %{_moduledir}/pam_rhosts.so
 %{_moduledir}/pam_rootok.so
 %{_moduledir}/pam_securetty.so
+%{_moduledir}/pam_selinux.so
+%{_moduledir}/pam_sepermit.so
 %{_moduledir}/pam_shells.so
 %{_moduledir}/pam_stress.so
 %{_moduledir}/pam_succeed_if.so
 %{_moduledir}/pam_tally2.so
 %{_moduledir}/pam_time.so
 %{_moduledir}/pam_timestamp.so
+%{_moduledir}/pam_tty_audit.so
 %{_moduledir}/pam_umask.so
 %{_moduledir}/pam_unix.so
 %{_moduledir}/pam_unix_acct.so
@@ -321,6 +321,7 @@ fi
 %dir %{_secconfdir}/namespace.d
 %attr(755,root,root) %config(noreplace) %{_secconfdir}/namespace.init
 %config(noreplace) %{_secconfdir}/pam_env.conf
+%config(noreplace) %{_secconfdir}/sepermit.conf
 %config(noreplace) %{_secconfdir}/time.conf
 %config(noreplace) %{_secconfdir}/opasswd
 %dir %{_secconfdir}/console.apps
